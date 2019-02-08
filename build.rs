@@ -20,8 +20,8 @@ fn main() -> Result<(), Box<Error>> {
             break PathBuf::from(env::var("CARGO_TARGET_DIR")?);
         };
 
-        if p.file_name().map(|f| f == "target") == Some(true) {
-            break p.to_owned();
+        if p.file_name().map(|f| f == "debug") == Some(true) {
+            break p.parent().unwrap().to_owned();
         }
 
         path = p.parent();

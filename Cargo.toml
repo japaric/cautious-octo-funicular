@@ -4,7 +4,7 @@ description = "Test: shipping an mdbook with API docs"
 edition = "2018"
 license = "MIT OR Apache-2.0"
 name = "cautious-octo-funicular"
-version = "0.1.2"
+version = "0.1.3"
 
 [build-dependencies]
 mdbook = "0.2.3"
