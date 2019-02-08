@@ -14,10 +14,14 @@ fn main() -> Result<(), Box<Error>> {
 
     let mut path = out_dir.parent();
     let path = loop {
-        let p = path.unwrap();
+        let p = if let Some(p) = path {
+            p
+        } else {
+            break PathBuf::from(env::var("CARGO_TARGET_DIR")?);
+        };
 
         if p.file_name().map(|f| f == "target") == Some(true) {
-            break p;
+            break p.to_owned();
         }
 
         path = p.parent();
