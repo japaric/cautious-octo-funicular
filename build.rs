@@ -6,9 +6,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let book_dir = PathBuf::from(env::var("CARGO_MANIFEST_DIR")?).join("book");
 
     // build the book
-    MDBook::load(&book_dir)?.build()?;
-
-    let src = book_dir.join("book");
+    let mut mdbook = MDBook::load(&book_dir)?;
 
     let out_dir = PathBuf::from(env::var("OUT_DIR")?);
 
@@ -34,7 +32,9 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     fs::create_dir_all(&dest).ok();
     fs::remove_dir_all(&dest).ok();
-    fs::rename(src, dest)?;
+
+    mdbook.config.build.build_dir = dest;
+    mdbook.build()?;
 
     Ok(())
 }
