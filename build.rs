@@ -2,7 +2,7 @@ use std::{env, error::Error, fs, path::PathBuf};
 
 use mdbook::MDBook;
 
-fn main() -> Result<(), Box<Error>> {
+fn main() -> Result<(), Box<dyn Error>> {
     let book_dir = PathBuf::from(env::var("CARGO_MANIFEST_DIR")?).join("book");
 
     // build the book
